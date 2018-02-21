@@ -29,7 +29,7 @@ if rootdir[-1] != '/':
 folders = []
 
 
-template = open('template.xspf').read()
+template = open('vlctemplate.xspf').read()
 
 class MyHTMLParser(HTMLParser):
     def handle_starttag(self, tag, attrs):
