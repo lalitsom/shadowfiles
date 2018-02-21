@@ -7,8 +7,8 @@ There are so many movies, Tv shows that we want to keep, but unfortunately the s
 #### How to use
 1. Download the [latest version]().
 2. Install python, recommended version 2.7
-3. open the downloaded file and open starthere.bat.
-4. Copy paste the link of an online directory, and then enter a folder name
+3. open the downloaded zip file and open starthere.bat.
+4. Copy paste the link of an online directory, and then enter a folder name.
 5. Wait for few secs and you're done.
 
 #### Wants to Contribute to Project
