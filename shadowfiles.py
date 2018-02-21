@@ -2,6 +2,11 @@ import urllib
 from HTMLParser import HTMLParser
 import os
 
+try:
+    from urllib import unquote
+except ImportError:
+    from urllib.parse import unquote
+
 print '\n Welcome to Shadow Files :: \n'
 print ':::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: \n'
 print  'Need help: File an issue  on https://github.com/lalitsom/shadowfiles/issues'
@@ -9,7 +14,7 @@ print ':::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: \n'
 print 'copy paste the link of an online directory \n'
 rooturl = raw_input()
 print 'Enter a folder name (eg. downloads)\n'
-rootdir = raw_input()
+rootdir = unquote(raw_input())
 
 def createdir(dirpath):
     if not os.path.exists(dirpath):
@@ -41,8 +46,8 @@ class MyHTMLParser(HTMLParser):
                 if ats[0] == 'href':
                     lnkname = ats[1]
                     if lnkname[-1] == '/':
-                        folders.append([rooturl+lnkname,rootdir+lnkname])
-                        createdir(rootdir+lnkname)
+                        folders.append([rooturl+lnkname,rootdir+unquote(lnkname)])
+                        createdir(rootdir+unquote(lnkname))
                     else:
                         print rooturl+lnkname +" ---> "+rootdir+lnkname
                         outfile=open('./'+rootdir+lnkname+".xspf", 'w+')
@@ -60,7 +65,7 @@ class MyHTMLParser(HTMLParser):
 def traverse(link, _dir):
     global rootdir
     global rooturl
-    rootdir = _dir
+    rootdir = unquote(_dir)
     rooturl = link
     parser = MyHTMLParser()
     createdir(_dir)
