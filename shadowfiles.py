@@ -50,7 +50,7 @@ class MyHTMLParser(HTMLParser):
                         createdir(rootdir+unquote(lnkname))
                     else:
                         print rooturl+lnkname +" ---> "+rootdir+lnkname
-                        outfile=open('./'+rootdir+lnkname+".xspf", 'w+')
+                        outfile=open('./'+rootdir+unquote(lnkname)+".xspf", 'w+')
                         outfile.write(template.replace("##sourcelink##",rooturl+lnkname))
                         outfile.close()
 
