@@ -43,16 +43,19 @@ class MyHTMLParser(HTMLParser):
         global rootdir
         if tag=='a':
             for ats in attrs:
-                if ats[0] == 'href':
-                    lnkname = ats[1]
-                    if lnkname[-1] == '/':
-                        folders.append([rooturl+lnkname,rootdir+unquote(lnkname)])
-                        createdir(rootdir+unquote(lnkname))
-                    else:
-                        print rooturl+lnkname +" ---> "+rootdir+lnkname
-                        outfile=open('./'+rootdir+unquote(lnkname)+".xspf", 'w+')
-                        outfile.write(template.replace("##sourcelink##",rooturl+lnkname))
-                        outfile.close()
+                try:                    
+                    if ats[0] == 'href':
+                        lnkname = ats[1]
+                        if lnkname[-1] == '/':
+                            folders.append([rooturl+lnkname,rootdir+unquote(lnkname)])
+                            createdir(rootdir+unquote(lnkname))
+                        else:
+                            print rooturl+lnkname +" ---> "+rootdir+lnkname
+                            outfile=open('./'+rootdir+unquote(lnkname)+".xspf", 'w+')
+                            outfile.write(template.replace("##sourcelink##",rooturl+lnkname))
+                            outfile.close()
+                except:
+                    print 'error occured, continuing.......'            
 
     def handle_endtag(self, tag):
         tmp = 6
