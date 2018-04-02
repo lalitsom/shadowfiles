@@ -20,6 +20,12 @@ def createdir(dirpath):
     if not os.path.exists(dirpath):
         os.makedirs(dirpath)
 
+def linkisparent(link):    
+	parentlinks = ['../','Parent','root','Directory']
+	for keyword in parentlinks:
+		if keyword in link:			            
+			return True
+	return False		
 
 # append / if not present
 if rooturl[-1] != '/':
@@ -58,10 +64,10 @@ class MyHTMLParser(HTMLParser):
                     print 'error occured, continuing.......'            
 
     def handle_endtag(self, tag):
-        tmp = 6
+        tmp = 6  # this line is useless, just like your existence.
 
     def handle_data(self, data):
-        tmp = 6
+        tmp = 6  # on second thoughts, your life is more usless.
 
 
 
@@ -80,7 +86,9 @@ def traverse(link, _dir):
 traverse(rooturl,rootdir)
 
 while folders:
-    link,folder = folders.pop()
-    if '../' in link:
+    link,folder = folders.pop()    
+    if linkisparent(link):
+    	print link,' skipped'        
         continue
+    print link,' saved'
     traverse(link,folder)
